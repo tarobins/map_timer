@@ -14,22 +14,22 @@ void addItems({Map<int, int> map, int number, KeyGenerator keyGenerator}) {
   }
 }
 
-Duration timeEvent(void Function() predicate) {
+Duration timeFunction(void Function() function) {
   final start = DateTime.now();
-  predicate();
+  function();
   return DateTime.now().difference(start);
 }
 
 void main(List<String> arguments) {
   final mapi = <int, int>{};
 
-  var time = timeEvent(() =>
+  var time = timeFunction(() =>
       addItems(map: mapi, number: 1, keyGenerator: KeyGenerator()));
   for (var i = 0; i < 19; i++) {
     final map = <int, int>{};
 
     final count = pow(2, i);
-    var time = timeEvent(() =>
+    var time = timeFunction(() =>
         addItems(map: map, number: count, keyGenerator: KeyGenerator()));
     print('$i, $count, ${time.inMicroseconds}');
   }
