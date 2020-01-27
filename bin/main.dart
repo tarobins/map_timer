@@ -22,22 +22,27 @@ Duration timeFunction(void Function() function) {
 }
 
 void main(List<String> arguments) {
+  // First one seems to take longer, so let the VM wake up.
+  final map = LinkedHashMap<int, int>(hashCode: (i) => i);
+  timeFunction(() =>
+      addItems(map: map, number: 10, keyGenerator: KeyGenerator()));
+
   final i = 24;
-  for (var j = 0; j < 10; j++) {
+  for (var j = 0; j < 15; j++) {
     final map = LinkedHashMap<int, int>(hashCode: (i) => i);
 
     final count = pow(2, i);
     var time = timeFunction(() =>
         addItems(map: map, number: count, keyGenerator: KeyGenerator()));
-    print('$i, $count, ${time}');
+    print('$i, $count, ${time.inMilliseconds}');
   }
   print('---------');
-  for (var j = 0; j < 10; j++) {
+  for (var j = 0; j < 15; j++) {
     final map = LinkedHashMap<int, int>();
 
     final count = pow(2, i);
     var time = timeFunction(() =>
         addItems(map: map, number: count, keyGenerator: KeyGenerator()));
-    print('$i, $count, ${time}');
+    print('$i, $count, ${time.inMilliseconds}');
   }
 }
