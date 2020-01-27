@@ -34,7 +34,7 @@ void main(List<String> arguments) {
     final count = pow(2, i);
     var time = timeFunction(() =>
         addItems(map: map, number: count, keyGenerator: KeyGenerator()));
-    print('$i, $count, ${time.inMilliseconds}');
+    print('${time.inMilliseconds}');
   }
   print('---------');
   for (var j = 0; j < 15; j++) {
@@ -43,6 +43,6 @@ void main(List<String> arguments) {
     final count = pow(2, i);
     var time = timeFunction(() =>
         addItems(map: map, number: count, keyGenerator: KeyGenerator()));
-    print('$i, $count, ${time.inMilliseconds}');
+    print('${time.inMilliseconds}');
   }
 }
