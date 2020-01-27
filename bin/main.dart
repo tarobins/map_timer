@@ -1,11 +1,12 @@
 
 
+import 'dart:collection';
 import 'dart:math';
 
 class KeyGenerator {
   int _nextKey = 0;
 
-  int get nextKey => _nextKey++ << 40;
+  int get nextKey => _nextKey++;
 }
 
 void addItems({Map<int, int> map, int number, KeyGenerator keyGenerator}) {
@@ -21,16 +22,22 @@ Duration timeFunction(void Function() function) {
 }
 
 void main(List<String> arguments) {
-  final mapi = <int, int>{};
-
-  var time = timeFunction(() =>
-      addItems(map: mapi, number: 1, keyGenerator: KeyGenerator()));
-  for (var i = 0; i < 19; i++) {
-    final map = <int, int>{};
+  final i = 24;
+  for (var j = 0; j < 10; j++) {
+    final map = LinkedHashMap<int, int>(hashCode: (i) => i);
 
     final count = pow(2, i);
     var time = timeFunction(() =>
         addItems(map: map, number: count, keyGenerator: KeyGenerator()));
-    print('$i, $count, ${time.inMicroseconds}');
+    print('$i, $count, ${time}');
+  }
+  print('---------');
+  for (var j = 0; j < 10; j++) {
+    final map = LinkedHashMap<int, int>();
+
+    final count = pow(2, i);
+    var time = timeFunction(() =>
+        addItems(map: map, number: count, keyGenerator: KeyGenerator()));
+    print('$i, $count, ${time}');
   }
 }
